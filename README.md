@@ -1,6 +1,10 @@
-# swapi
+# SWAPI
 
-A small react project for playing around with SWAPI _(Star Wars API)_
+A small project for playing around with SWAPI _(Star Wars API)_
+
+Written with React + Typescript + Vite
+
+## Getting Started
 
 ```bash
 npm i && npm run dev
@@ -10,5 +14,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Resources
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Vite Documentation](https://vitejs.dev/guide/) - learn about Vite.
 - [SWAPI Documentation](https://swapi.dev/) - The Star Wars API.

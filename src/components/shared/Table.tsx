@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Table as ChakraTable, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
-import PropTypes from 'prop-types'
 
-const Table = (props) => {
+type TableProps = { data: never[] }
+
+export default function Table(props: TableProps) {
   const { data } = props
   const [headerList, setHeaderList] = useState([])
 
@@ -42,13 +43,3 @@ const Table = (props) => {
     </ChakraTable>
   )
 }
-
-Table.propTypes = {
-  data: PropTypes.array
-}
-
-Table.defaultProps = {
-  data: []
-}
-
-export default Table

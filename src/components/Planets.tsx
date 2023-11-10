@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Heading, Button, Text, Divider } from '@chakra-ui/react'
 
-import { baseUrl, httpGet } from '../src/requests'
-import Table from '../src/Table'
+import { baseUrl, httpGet } from '../utils/request'
+import Table from './shared/Table'
 
 
-const Planets = (props) => {
+export default function Planets() {
   const [planets, setPlanets] = useState([])
   const [fetchMoreUrl, setFetchMoreUrl] = useState('')
   const [shouldFetchMore, setShouldFetchMore] = useState(false)
@@ -62,7 +62,7 @@ const Planets = (props) => {
 
   return (
     <main>
-      <Heading as="H1">Planets</Heading>
+      <Heading as="h1">Planets</Heading>
       <Text fontSize="2xl">Total results: {planets.length}</Text>
       <Divider />
 
@@ -73,9 +73,3 @@ const Planets = (props) => {
     </main>
   )
 }
-
-Planets.propTypes = {
-
-}
-
-export default Planets

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import { baseUrl, httpGet } from '../src/requests'
+import { baseUrl, httpGet } from '../utils/request'
 
 
-const Vehicles = (props) => {
+export default function Vehicles() {
   const [vehicles, setVehicles] = useState([])
 
   useEffect(() => {
@@ -29,9 +29,3 @@ const Vehicles = (props) => {
     </main>
   )
 }
-
-Vehicles.propTypes = {
-
-}
-
-export default Vehicles

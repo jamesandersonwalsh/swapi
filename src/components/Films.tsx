@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
-import { baseUrl, httpGet } from '../src/requests'
+import { baseUrl, httpGet } from '../utils/request'
 
 
-const Films = (props) => {
+const Films = () => {
   const [films, setFilms] = useState([])
 
   useEffect(() => {
@@ -26,10 +26,6 @@ const Films = (props) => {
       </ul>
     </main>
   )
-}
-
-Films.propTypes = {
-
 }
 
 export default Films
