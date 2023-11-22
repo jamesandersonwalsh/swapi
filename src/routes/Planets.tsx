@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Heading, Button, Text, Divider } from '@chakra-ui/react'
 
-import { baseUrl, httpGet } from '../utils/request'
-import Table from '../components/Table'
+import { baseUrl, httpGet } from '@/utils/request'
+import Table from '@components/Table'
 
 
 export function Planets() {
