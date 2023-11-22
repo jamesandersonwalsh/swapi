@@ -1,30 +1,26 @@
-import { useState, useEffect } from 'react'
-
 import { fetchPeople } from './api'
-
-interface People {
-  name: string
-}
+import { useQuery } from '@tanstack/react-query'
+import { Radar } from 'lucide-react'
+import { Main } from '@/components/layout'
+import { TypographyH1 } from '@/components/typography'
 
 export function People() {
-  const [people, setPeople] = useState<People[]>([])
-
-  useEffect(() => {
-    async function doFetchPeople() {
-      const { results } = await fetchPeople()
-      setPeople(results)
-    }
-
-    doFetchPeople()
-  }, [])
+  const { isLoading, data, isSuccess } = useQuery({
+    queryKey: ['people'],
+    queryFn: () => fetchPeople(),
+  })
 
   return (
-    <main>
-      <ul>
-        {people.map((person) => {
-          return <li key={person.name}>{person.name}</li>
-        })}
-      </ul>
-    </main>
+    <Main>
+      <TypographyH1>People</TypographyH1>
+      {isLoading && <Radar className="w-16 h-16 animate-spin" />}
+      {isSuccess && (
+        <ul>
+          {data?.results.map((person) => {
+            return <li key={person.name}>{person.name}</li>
+          })}
+        </ul>
+      )}
+    </Main>
   )
 }

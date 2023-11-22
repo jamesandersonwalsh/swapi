@@ -12,6 +12,6 @@ export async function fetchFilms() {
   return {
     next,
     previous,
-    results
+    results,
   }
 }
