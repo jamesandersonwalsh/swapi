@@ -1,59 +1,70 @@
 import { useState, useEffect } from 'react'
-
 import { httpGet } from '@/utils'
-import { Table } from '@/components/table'
+
+import { TBody, Table, THead, Tr, Th, Td } from '@/components/table'
 import { Main } from '@/components/layout'
 import { Button } from '@/components/ui/button'
 import { Orbit } from 'lucide-react'
+import { TypographyH1, TypographyP } from '@/components/typography'
+
+export interface Planet {
+  name: string
+  climate: string
+  terrain: string
+  residents: unknown[]
+  films: unknown[]
+}
+
+export interface PlanetResponse {
+  results: Planet[]
+  next: string
+}
+
+async function fetchPlanets(
+  url = `${import.meta.env.VITE_BASE_SWAPI_URL}/planets`,
+): Promise<PlanetResponse> {
+  const response = await httpGet<PlanetResponse>(url)
+
+  const { results, next } = response
+
+  return {
+    next,
+    results: results.map((result) => ({
+      name: result.name,
+      climate: result.climate,
+      terrain: result.terrain,
+      residents: result.residents,
+      films: result.films,
+    })),
+  }
+}
 
 export function Planets() {
-  const [planets, setPlanets] = useState([])
+  const [planets, setPlanets] = useState<Planet[]>([])
   const [fetchMoreUrl, setFetchMoreUrl] = useState('')
   const [shouldFetchMore, setShouldFetchMore] = useState(false)
 
-  async function fetchPlanets(url = `${import.meta.env.VITE_BASE_SWAPI_URL}/planets`) {
-    const response = await httpGet(url)
-
-    const { results: planetsHTTPResult, next: nextPageUrl } = response
-
-    const planetsWithResidents = await fetchPlanetsResidents(planetsHTTPResult)
-
-    setPlanets([...planets, ...planetsWithResidents])
-    setFetchMoreUrl(nextPageUrl)
-  }
-
-  // fetch the residents of each planet
-  async function fetchPlanetsResidents(planets) {
-    const planetsWithResidentsPromises = planets.map(async (planet) => {
-      const { residents } = planet
-
-      const residentNamePromises = await residents.map(async (residentUrl) => {
-        const data = await httpGet(residentUrl)
-
-        return data.name
-      })
-
-      const residentNames = await Promise.all(residentNamePromises)
-
-      return {
-        ...planet,
-        residents: residentNames,
-      }
-    })
-
-    return await Promise.all(planetsWithResidentsPromises)
-  }
-
-  // Initial load
   useEffect(() => {
-    fetchPlanets()
+    const fetchData = async () => {
+      const { results, next } = await fetchPlanets()
+
+      setPlanets(results)
+      setFetchMoreUrl(next)
+    }
+
+    fetchData()
   }, [])
 
-  // Pagination
   useEffect(() => {
-    if (shouldFetchMore && fetchMoreUrl) {
-      fetchPlanets(fetchMoreUrl)
+    const fetchData = async () => {
+      const { results, next } = await fetchPlanets(fetchMoreUrl)
       setShouldFetchMore(false)
+      setPlanets((planets) => [...planets, ...results])
+      setFetchMoreUrl(next)
+    }
+
+    if (shouldFetchMore && fetchMoreUrl) {
+      fetchData()
     }
   }, [fetchMoreUrl, shouldFetchMore])
 
@@ -63,16 +74,36 @@ export function Planets() {
 
   return (
     <Main>
-      <h1>Planets</h1>
-      <p className="text-2xl">Total results: {planets.length}</p>
+      <TypographyH1>Planets</TypographyH1>
+      <TypographyP className="text-2xl">Total results: {planets.length}</TypographyP>
       <hr />
 
-      <Table data={planets} />
+      <Table>
+        <THead>
+          <Tr>
+            <Th>Name</Th>
+            <Th>Climate</Th>
+            <Th>Residents</Th>
+            <Th>Films</Th>
+          </Tr>
+        </THead>
+        <TBody>
+          {planets.map((planet) => {
+            return (
+              <Tr key={planet.name}>
+                {Object.entries(planet).map(([_key, value]) => {
+                  return <Td>{value}</Td>
+                })}
+              </Tr>
+            )
+          })}
+        </TBody>
+      </Table>
 
       <br />
       <Button onClick={handleLoadMore} className="group">
         <Orbit className="mr-2 h-4 w-4 group-hover:animate-spin" />
-        Scan more planets
+        Run more planetary scans
       </Button>
     </Main>
   )
