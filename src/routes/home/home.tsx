@@ -34,10 +34,10 @@ export function Home() {
           </Card>
         </Link>
 
-        <Link to="/characters">
+        <Link to="/people">
           <Card>
             <CardHeader>
-              <CardTitle>Characters</CardTitle>
+              <CardTitle>People</CardTitle>
               <CardDescription>
                 Looking for someone? There are some API routes some would consider ... unnatural.
               </CardDescription>
