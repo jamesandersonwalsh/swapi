@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import * as request from '@/request'
+import { fetchFilms } from './api'
 
 interface Film {
   title: string
@@ -12,13 +12,13 @@ export function Films() {
   const [films, setFilms] = useState<Film[]>([])
 
   useEffect(() => {
-    async function fetchFilms() {
-      const { results } = await request.get<Film[]>(`${import.meta.env.VITE_BASE_SWAPI_URL}/films`)
+    async function doFetchFilms() {
+      const { results } = await fetchFilms()
 
       setFilms(results)
     }
 
-    fetchFilms()
+    doFetchFilms()
   }, [])
 
   return (

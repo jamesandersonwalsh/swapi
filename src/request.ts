@@ -1,9 +1,9 @@
 const BASE_URL = `${import.meta.env.VITE_BASE_SWAPI_URL}`
 
 export interface SwapiResponse<T> {
-  results: T,
-  next: string,
-  previous:string
+  results: T
+  next: string
+  previous: string
 }
 
 export async function get<T>(

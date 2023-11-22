@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import * as request from '@/request'
+import { fetchVehicles } from './api'
 
 interface Vehicle {
   name: string
@@ -12,15 +12,13 @@ export function Vehicles() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
 
   useEffect(() => {
-    async function fetchVehicles() {
-      const { results } = await request.get<Vehicle[]>(
-        `${import.meta.env.VITE_BASE_SWAPI_URL}/vehicles`,
-      )
+    async function doFetchVehicles() {
+      const { results } = await fetchVehicles()
 
       setVehicles(results)
     }
 
-    fetchVehicles()
+    doFetchVehicles()
   }, [])
 
   return (

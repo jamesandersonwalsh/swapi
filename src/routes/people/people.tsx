@@ -1,23 +1,21 @@
 import { useState, useEffect } from 'react'
 
-import * as request from '@/request'
+import { fetchPeople } from './api'
 
 interface People {
   name: string
 }
 
-export function Characters() {
+export function People() {
   const [people, setPeople] = useState<People[]>([])
 
   useEffect(() => {
-    async function fetchPeople() {
-      const { results } = await request.get<People[]>(
-        `${import.meta.env.VITE_BASE_SWAPI_URL}/people`,
-      )
+    async function doFetchPeople() {
+      const { results } = await fetchPeople()
       setPeople(results)
     }
 
-    fetchPeople()
+    doFetchPeople()
   }, [])
 
   return (
