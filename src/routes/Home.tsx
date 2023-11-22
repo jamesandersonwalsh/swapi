@@ -26,8 +26,8 @@ export function Home() {
               </CardDescription>
             </CardHeader>
             <CardFooter>
-              <Button className="w-full">
-                <Orbit className="mr-2 h-4 w-4" />
+              <Button className="w-full group">
+                <Orbit className="mr-2 h-4 w-4 group-hover:animate-spin" />
                 Run Planetary Scan
               </Button>
             </CardFooter>

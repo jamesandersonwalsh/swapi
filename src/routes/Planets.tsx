@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 
 import { httpGet } from '@/utils'
 import { Table } from '@/components/table'
+import { Main } from '@/components/layout'
+import { Button } from '@/components/ui/button'
+import { Orbit } from 'lucide-react'
 
 export function Planets() {
   const [planets, setPlanets] = useState([])
@@ -59,7 +62,7 @@ export function Planets() {
   }
 
   return (
-    <main>
+    <Main>
       <h1>Planets</h1>
       <p className="text-2xl">Total results: {planets.length}</p>
       <hr />
@@ -67,7 +70,10 @@ export function Planets() {
       <Table data={planets} />
 
       <br />
-      <button onClick={handleLoadMore}>Load more</button>
-    </main>
+      <Button onClick={handleLoadMore} className="group">
+        <Orbit className="mr-2 h-4 w-4 group-hover:animate-spin" />
+        Scan more planets
+      </Button>
+    </Main>
   )
 }
