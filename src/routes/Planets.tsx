@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Heading, Button, Text, Divider } from '@chakra-ui/react'
 
 import { baseUrl, httpGet } from '@/utils/request'
 import Table from '@components/Table'
@@ -61,14 +60,14 @@ export function Planets() {
 
   return (
     <main>
-      <Heading as="h1">Planets</Heading>
-      <Text fontSize="2xl">Total results: {planets.length}</Text>
-      <Divider />
+      <h1>Planets</h1>
+      <p className="text-2xl">Total results: {planets.length}</p>
+      <hr />
 
       <Table data={planets} />
 
       <br />
-      <Button onClick={handleLoadMore}>Load more</Button>
+      <button onClick={handleLoadMore}>Load more</button>
     </main>
   )
 }
