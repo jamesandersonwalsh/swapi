@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react'
 
-import { httpGet } from '@/utils'
+import * as request from '@/request'
+
+interface People {
+  name: string
+}
 
 export function Characters() {
-  const [people, setPeople] = useState([])
+  const [people, setPeople] = useState<People[]>([])
 
   useEffect(() => {
     async function fetchPeople() {
-      const response = await httpGet(`${import.meta.env.VITE_BASE_SWAPI_URL}/people`)
-      const { results: peopleHttpResponse } = response
-
-      setPeople(peopleHttpResponse)
+      const { results } = await request.get<People[]>(
+        `${import.meta.env.VITE_BASE_SWAPI_URL}/people`,
+      )
+      setPeople(results)
     }
 
     fetchPeople()

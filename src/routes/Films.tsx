@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react'
 
-import { httpGet } from '@/utils'
+import * as request from '@/request'
+
+interface Film {
+  title: string
+  episode_id: string
+  release_date: string
+}
 
 export function Films() {
-  const [films, setFilms] = useState([])
+  const [films, setFilms] = useState<Film[]>([])
 
   useEffect(() => {
     async function fetchFilms() {
-      const response = await httpGet(`${import.meta.env.VITE_BASE_SWAPI_URL}/films`)
-      const { results: filmsHttpResponse } = response
+      const { results } = await request.get<Film[]>(`${import.meta.env.VITE_BASE_SWAPI_URL}/films`)
 
-      setFilms(filmsHttpResponse)
+      setFilms(results)
     }
 
     fetchFilms()

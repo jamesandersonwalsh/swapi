@@ -1,27 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-
-import { Characters } from '@/routes/Characters'
-import { Films } from '@/routes/Films'
-import { Vehicles } from '@/routes/Vehicles'
-import { Home } from '@/routes/Home'
-import { Planets } from '@/routes/Planets'
 import { ThemeProvider } from '@/components/theme-provider'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import './globals.css'
+import { Routes } from './routes'
+
+const queryClient = new QueryClient()
 
 function App() {
   return (
-    <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/characters" element={<Characters />} />
-          <Route path="/films" element={<Films />} />
-          <Route path="/planets" element={<Planets />} />
-          <Route path="/vehicles" element={<Vehicles />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <Routes />
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 

@@ -1,22 +1,27 @@
 import { useState, useEffect } from 'react'
 
-import { httpGet } from '@/utils'
+import * as request from '@/request'
+
+interface Vehicle {
+  name: string
+  model: string
+  manufacturer: string
+}
 
 export function Vehicles() {
-  const [vehicles, setVehicles] = useState([])
+  const [vehicles, setVehicles] = useState<Vehicle[]>([])
 
   useEffect(() => {
     async function fetchVehicles() {
-      const response = await httpGet(`${import.meta.env.VITE_BASE_SWAPI_URL}/vehicles`)
-      const { results: vehiclesHttpResponse } = response
+      const { results } = await request.get<Vehicle[]>(
+        `${import.meta.env.VITE_BASE_SWAPI_URL}/vehicles`,
+      )
 
-      setVehicles(vehiclesHttpResponse)
+      setVehicles(results)
     }
 
     fetchVehicles()
   }, [])
-
-  console.log('vehicles', vehicles)
 
   return (
     <main>
