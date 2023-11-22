@@ -5,12 +5,13 @@ import { Films } from '@/routes/Films'
 import { Vehicles } from '@/routes/Vehicles'
 import { Home } from '@/routes/Home'
 import { Planets } from '@/routes/Planets'
+import { ThemeProvider } from '@/components/theme-provider'
 
 import './globals.css'
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -20,7 +21,7 @@ function App() {
           <Route path="/vehicles" element={<Vehicles />} />
         </Routes>
       </Router>
-    </>
+    </ThemeProvider>
   )
 }
 

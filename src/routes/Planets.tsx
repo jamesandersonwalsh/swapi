@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 
-import { baseUrl, httpGet } from '@/utils/request'
-import Table from '@components/Table'
+import { httpGet } from '@/utils'
+import { Table } from '@/components/table'
 
 export function Planets() {
   const [planets, setPlanets] = useState([])
   const [fetchMoreUrl, setFetchMoreUrl] = useState('')
   const [shouldFetchMore, setShouldFetchMore] = useState(false)
 
-  async function fetchPlanets(url = `${baseUrl}/planets`) {
+  async function fetchPlanets(url = `${import.meta.env.VITE_BASE_SWAPI_URL}/planets`) {
     const response = await httpGet(url)
 
     const { results: planetsHTTPResult, next: nextPageUrl } = response
