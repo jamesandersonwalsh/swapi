@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { baseUrl, httpGet } from '../utils/request'
 
 
-export default function Characters() {
+export function Characters() {
   const [people, setPeople] = useState([])
 
   useEffect(() => {

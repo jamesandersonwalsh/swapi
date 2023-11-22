@@ -1,8 +1,8 @@
 # SWAPI
 
-A small project for playing around with SWAPI _(Star Wars API)_
+A tiny sandbox project for playing around with React + SWAPI _(Star Wars API)_.
 
-Written with React + Typescript + Vite
+Written with: `React`, `TailwindCSS`, `React Router DOM`, & `Vite`.
 
 ## Getting Started
 

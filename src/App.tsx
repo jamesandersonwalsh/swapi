@@ -3,12 +3,12 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import './App.css'
-import Characters from './components/Characters'
-import Films from './components/Films'
-import Vehicles from './components/Vehicles'
-import Home from './components/Home'
-import Planets from './components/Planets'
+
+import { Characters } from './routes/Characters'
+import { Films } from './routes/Films'
+import { Vehicles } from './routes/Vehicles'
+import { Home } from './routes/Home'
+import { Planets } from './routes/Planets'
 
 function App() {
 

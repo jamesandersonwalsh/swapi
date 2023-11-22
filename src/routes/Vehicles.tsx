@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { baseUrl, httpGet } from '../utils/request'
 
 
-export default function Vehicles() {
+export function Vehicles() {
   const [vehicles, setVehicles] = useState([])
 
   useEffect(() => {

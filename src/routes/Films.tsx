@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { baseUrl, httpGet } from '../utils/request'
 
 
-const Films = () => {
+export function Films() {
   const [films, setFilms] = useState([])
 
   useEffect(() => {
@@ -27,5 +27,3 @@ const Films = () => {
     </main>
   )
 }
-
-export default Films

@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { Heading, Button, Text, Divider } from '@chakra-ui/react'
 
 import { baseUrl, httpGet } from '../utils/request'
-import Table from './shared/Table'
+import Table from '../components/Table'
 
 
-export default function Planets() {
+export function Planets() {
   const [planets, setPlanets] = useState([])
   const [fetchMoreUrl, setFetchMoreUrl] = useState('')
   const [shouldFetchMore, setShouldFetchMore] = useState(false)

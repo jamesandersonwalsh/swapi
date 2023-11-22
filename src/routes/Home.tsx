@@ -13,7 +13,7 @@ const boxStyles = {
   }
 }
 
-export default function Home() {
+export function Home() {
   return (
     <Flex align="center" justifyContent="center" height="100vh" textAlign="center">
       <main>
