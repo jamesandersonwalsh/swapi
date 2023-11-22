@@ -1,4 +1,3 @@
-
 export const baseUrl = 'https://swapi.dev/api/'
 
 export async function httpGet(endpoint = baseUrl) {

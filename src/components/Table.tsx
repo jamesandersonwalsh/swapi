@@ -17,28 +17,25 @@ export default function Table(props: TableProps) {
     <ChakraTable size="sm">
       <Thead>
         <Tr>
-          {headerList.map(header => <Th key={header}>{header}</Th>)}
+          {headerList.map((header) => (
+            <Th key={header}>{header}</Th>
+          ))}
         </Tr>
       </Thead>
       <Tbody>
-        {data.map(row => {
+        {data.map((row) => {
           const entries = Object.entries(row)
 
           return (
             <Tr key={entries[0]}>
-              {entries.map(entry => {
+              {entries.map((entry) => {
                 const [key, value] = entry
-  
-                return (
-                  <Td key={key}>
-                    {value}
-                  </Td>
-                )
+
+                return <Td key={key}>{value}</Td>
               })}
             </Tr>
           )
-        })
-        }
+        })}
       </Tbody>
     </ChakraTable>
   )

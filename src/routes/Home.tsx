@@ -9,15 +9,17 @@ const boxStyles = {
   height: '5em',
   width: '20em',
   _hover: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 }
 
 export function Home() {
   return (
     <Flex align="center" justifyContent="center" height="100vh" textAlign="center">
       <main>
-        <Heading as="h1" paddingBottom="1em">Hello, there, General Kenobi.</Heading>
+        <Heading as="h1" paddingBottom="1em">
+          Hello, there, General Kenobi.
+        </Heading>
 
         <SimpleGrid columns={2} spacing={10}>
           <Link to="/planets">

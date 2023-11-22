@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import { Characters } from '@/routes/Characters'
 import { Films } from '@/routes/Films'
@@ -11,7 +7,6 @@ import { Home } from '@/routes/Home'
 import { Planets } from '@/routes/Planets'
 
 function App() {
-
   return (
     <Router>
       <Routes>

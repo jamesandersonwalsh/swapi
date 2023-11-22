@@ -4,7 +4,6 @@ import { Heading, Button, Text, Divider } from '@chakra-ui/react'
 import { baseUrl, httpGet } from '@/utils/request'
 import Table from '@components/Table'
 
-
 export function Planets() {
   const [planets, setPlanets] = useState([])
   const [fetchMoreUrl, setFetchMoreUrl] = useState('')
@@ -12,8 +11,8 @@ export function Planets() {
 
   async function fetchPlanets(url = `${baseUrl}/planets`) {
     const response = await httpGet(url)
-    
-    const {results: planetsHTTPResult, next: nextPageUrl} = response
+
+    const { results: planetsHTTPResult, next: nextPageUrl } = response
 
     const planetsWithResidents = await fetchPlanetsResidents(planetsHTTPResult)
 
@@ -23,10 +22,10 @@ export function Planets() {
 
   // fetch the residents of each planet
   async function fetchPlanetsResidents(planets) {
-    const planetsWithResidentsPromises = planets.map(async planet => {
+    const planetsWithResidentsPromises = planets.map(async (planet) => {
       const { residents } = planet
 
-      const residentNamePromises = await residents.map(async residentUrl => {
+      const residentNamePromises = await residents.map(async (residentUrl) => {
         const data = await httpGet(residentUrl)
 
         return data.name
@@ -36,7 +35,7 @@ export function Planets() {
 
       return {
         ...planet,
-        residents: residentNames
+        residents: residentNames,
       }
     })
 
@@ -55,7 +54,7 @@ export function Planets() {
       setShouldFetchMore(false)
     }
   }, [fetchMoreUrl, shouldFetchMore])
-  
+
   const handleLoadMore = () => {
     setShouldFetchMore(true)
   }
@@ -68,7 +67,7 @@ export function Planets() {
 
       <Table data={planets} />
 
-      <br/>
+      <br />
       <Button onClick={handleLoadMore}>Load more</Button>
     </main>
   )
